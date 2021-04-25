@@ -53,7 +53,7 @@ class Solution:
                 elif unit_type == 'Col':
                     val = board[i][k]
                 else: # unit_type == 'Cell':
-                    val = board[k // 3 + i//3][k % 3 + i % 3]
+                    val = board[3*(k // 3) + (i//3)][3*(k % 3) + (i % 3)]
                 if len(val) > 1:
                     for cur in val:
                         if cur not in d.keys():
@@ -70,8 +70,8 @@ class Solution:
                         row_num = value[0]
                         col_num = k
                     else: # unit_type == 'Cell':
-                        row_num = k // 3 + value[0] // 3
-                        col_num = k % 3 + value[0] % 3
+                        row_num = 3*(k // 3) + value[0] // 3
+                        col_num = 3*(k % 3) + value[0] % 3
                     board[row_num][col_num] = key
                     queue.append((row_num,col_num))
                     rec_set.add((row_num,key))
@@ -135,15 +135,15 @@ class Solution:
                     if look_for_missing_num(unit_type, k):
                         break
             if len(rec_set) < 3 * 9 * 9 - 1:
-                for i in range(9):
-                    for k in range(1,10):
-                        if not (i,str(k)) in rec_set:
-                            print(i,str(k))
-                        if not (i,str(k)) in rec_set:
-                            print(str(k),i)
-                        if not (i,str(k)) in rec_set:
-                            print(i // 3, i % 3, str(k))
-                        print( len(rec_set))
+                #for i in range(9):
+                #    for k in range(1,10):
+                #        if not (i,str(k)) in rec_set:
+                #            print(i,str(k))
+                #        if not (i,str(k)) in rec_set:
+                #            print(str(k),i)
+                #        if not (i,str(k)) in rec_set:
+                #            print(i // 3, i % 3, str(k))
+                print( len(rec_set))
                 print('cool stuff: need better algorithm.')
                 for i in range(9):
                     pri = '|'
@@ -153,7 +153,7 @@ class Solution:
                         else:
                             pri += '.' +'|'
                     print(pri)
-                    #print('-------------------')
+                print('-------------------')
         
         
         
@@ -184,4 +184,8 @@ board_1 = [[".",".","9","7","4","8",".",".","."],["7",".",".",".",".",".",".",".
 board_2 = [[".",".",".","2",".",".",".","6","3"],["3",".",".",".",".","5","4",".","1"],[".",".","1",".",".","3","9","8","."],[".",".",".",".",".",".",".","9","."],[".",".",".","5","3","8",".",".","."],[".","3",".",".",".",".",".",".","."],[".","2","6","3",".",".","5",".","."],["5",".","3","7",".",".",".",".","8"],["4","7",".",".",".","1",".",".","."]]
 boards = [board_0,board_1,board_2]
 Solution().solveSudoku(boards[2])
-print(boards[1])    
+"""
+This prompts an error with the calculation.
+"""
+
+print(boards[2])    

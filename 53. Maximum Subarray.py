@@ -27,12 +27,7 @@ class Solution:
             nums_improved.pop(0)
         #at this point, we have a list, starting with a positive number, where we know the positives and negatives are alternating.
         accume = nums_improved[0]
-        maximal = accume
-        for i in range(len(nums_improved))[1::2]:
-            new_accume = accume + nums_improved[i-1] + nums_improved[i]
-            if new_accume < 
-
-        print (str(nums_improved))
+        two_dim_dynamic_programing = [[]]
 
 numsnums = [
     [-2,1,-3,4,-1,2,1,-5,4],

@@ -2,19 +2,20 @@ from typing import List
 
 class Solution:
     def firstMissingPositive(self, nums: List[int]) -> int:
-        n = min(max(nums),len(nums))
-        if n <=0:
-            return 1
-        ordered_nums = [False for _ in range(n)]
-        for c in nums:
-            if c > 0 and c <= n:
-                ordered_nums[c-1] = True
+        n = len(nums)
         for i in range(n):
-            if not ordered_nums[i]:
-                return i+1
-        return n+1
+            j = nums[i] - 1
+            while j < n and j >= 0:
+                nums[j],nums[i] = nums[i], nums[j]
+                j = nums[i] - 1
+                if nums[i] == i + 1:
+                    break
+        for i in range(n):
+            if i + 1 != nums[i]:
+                return i + 1
+        return n + 1
         
-nums = [7,8,9,11,12]
+nums = [1,1] #breaks this!!
 out = Solution().firstMissingPositive(nums)
 print(out)
 

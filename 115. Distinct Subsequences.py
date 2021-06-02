@@ -59,6 +59,61 @@ class Solution:
 Is there a way to make 'i' start at 0?
 maybe there is no logical need for that - as i corresponds to the length of the substring of t.
 
+
+
+###
+The best solution was:
+
+import bisect
+
+class Solution:
+    def numDistinct(self, s: str, t: str) -> int:
+        sHash = {}
+        for index, chr in enumerate(s):
+            if chr in sHash:
+                sHash[chr].append(index)
+            else:
+                sHash[chr] = [index]
+
+        tHash = {}
+        for index, chr in enumerate(t):
+            if chr in tHash:
+                tHash[chr].append(index)
+            else:
+                tHash[chr] = [index]
+
+        level = []
+        if t[-1] in sHash:
+            level = [[position, 1] for position in sHash[t[-1]]]
+
+        for index in range(len(t) - 2, -1, -1):
+            chr = t[index]
+            newLevel = []
+            newHash = {}
+            for levelPosition in level:
+                if chr in sHash:
+                    positions = sHash[chr]
+                    startIndex = bisect.bisect_left(positions, index)
+                    for posIndex in range(startIndex, len(positions)):
+                        position = positions[posIndex]
+                        if position < levelPosition[0]:
+                            if position not in newHash:
+                                newPosition = [position, levelPosition[1]]
+                                newHash[position] = newPosition
+                                newLevel.append(newPosition)
+                            else:
+                                newHash[position][1] += levelPosition[1]
+                        else:
+                            break
+            level = newLevel
+
+        result = 0
+        for levelPosition in level:
+            result += levelPosition[1]
+
+        return result
+
+
 """
 
 inputs = [

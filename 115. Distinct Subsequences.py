@@ -1,4 +1,6 @@
 class Solution:
+    # runtime_comp: O(m \times k)
+    # mem_comp: O(m)
     def numDistinct(self, s: str, t: str) -> int:
         m = len(s)
         k = len(t)

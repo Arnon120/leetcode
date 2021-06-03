@@ -1,33 +1,44 @@
+from typing import List
+
 class Solution:
-    # def maxSubArray(self, nums: List[int]) -> int:
-    def maxSubArray(self, nums) -> int:
-        """
-        input: nums = a list of integers:
-            len(nums) > 0
-        """
-        nums_improved = list()
-        so_far = 0
-        maximal = 0
-        for num in nums:
-            maximal = max(maximal,num)
-            if so_far * num <= 0:
-                if so_far !=0:
-                    nums_improved.append(so_far)
-                so_far = num
-            else:
-                so_far +=num
-        if len(nums_improved) == 0:
-            return maximal
-        elif len(nums_improved) == 1:
-            if nums_improved[0] < 0:
-                return maximal
-            else: #nums_improved[0] >0  as nums_improved[0] != 0
-                return nums_improved[0]
-        if nums_improved[0] <0:
-            nums_improved.pop(0)
-        #at this point, we have a list, starting with a positive number, where we know the positives and negatives are alternating.
-        accume = nums_improved[0]
-        two_dim_dynamic_programing = [[]]
+    def maxSubArray(self, nums: List[int]) -> int:
+        
+        max_so_far = answer = nums[0]
+        
+        for curr in nums[1::]:
+            max_so_far = max(curr + max_so_far, curr)
+            answer = max(max_so_far, answer)
+            
+        return answer
+
+""""
+Same idea - alot simplier.
+No need for so many cases etc...
+
+
+sample 68 ms submission
+
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        
+        if not nums:
+            return None
+        
+        max_so_far = answer = nums[0]
+        
+        for i in range(1, len(nums)):
+            curr = nums[i]
+            max_so_far = max(curr + max_so_far, curr)
+            answer = max(max_so_far, answer)
+            
+        return answer
+
+
+
+It turns out it is better to just do inplace replacments, on the array.
+
+It turns out that if you cut on the lines of code in the for loop, this is the thing that does the best changes!
+"""
 
 numsnums = [
     [-2,1,-3,4,-1,2,1,-5,4],
@@ -35,7 +46,12 @@ numsnums = [
     [5,4,-1,7,8],
     [1,1,1,1],
     [-1,-1,-1,-1],
-    [-1,1,-1,1,-1,1]
+    [-1,1,-1,1,-1,1],
+    [-1],
+    [-2,-1],
+    [-1,-2]
 ]
-res = Solution().maxSubArray(numsnums[0])
-            
+for nums in numsnums:
+    res = Solution().maxSubArray(nums) 
+    print(nums)
+    print(res)          

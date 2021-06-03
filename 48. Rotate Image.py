@@ -1,6 +1,7 @@
 from typing import List
 
 
+# The follwing line explains why this is stright wrong answer.
 # This is worst time than transpose then switch rows, as this is switching rows is very very cheap - comparing to how mach change you gain.
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:

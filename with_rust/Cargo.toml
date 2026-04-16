@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+
+members = [
+  "crates/questions",
+  "crates/utils",
+]
+
+[workspace.package]
+version = "0.0.0"
+edition = "2021"
+
+[workspace.lints.rust]
+future-incompatible = "warn"
+nonstandard-style = "warn"
+rust-2018-idioms = "warn"
+
+[workspace.lints.clippy]
+as_conversions = "warn"

@@ -183,30 +183,25 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    // use rstest::rstest;
+    use rstest::rstest;
     use super::*;
 
-    #[test]
-    fn run_test(){
-        let test_cases = [
-            (
-                vec![vec!['a','a','b']], 
-                false
-            ),
-            (
-                vec![
-                    vec!['d','b','b'],
-                    vec!['c','a','a'],
-                    vec!['b','a','c'],
-                    vec!['c','c','c'],
-                    vec!['d','d','a']
-                ],
-                false
-            )
-        ];
-        for (grid, expected) in test_cases {
-            test_contains_cycle(grid, expected);
-        }
+    #[rstest]
+    #[case(
+        vec![vec!['a','a','b']], 
+        false)]
+    #[case(
+        vec![
+            vec!['d','b','b'],
+            vec!['c','a','a'],
+            vec!['b','a','c'],
+            vec!['c','c','c'],
+            vec!['d','d','a']
+        ],
+        false
+    )]
+    fn run_test(#[case] grid: Vec<Vec<char>>, #[case] expected: bool){
+        test_contains_cycle(grid, expected);
     }
 
     fn test_contains_cycle(grid: Vec<Vec<char>>, expected: bool) {

@@ -1,5 +1,5 @@
 [package]
-name = "questions"
+name = "rejected_solutions"
 version.workspace = true
 edition.workspace = true
 

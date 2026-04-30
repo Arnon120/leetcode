@@ -4,11 +4,15 @@ resolver = "2"
 members = [
   "crates/questions",
   "crates/utils",
+  "crates/rejected_solutions",
 ]
 
 [workspace.package]
 version = "0.0.0"
 edition = "2021"
+
+[workspace.dependencies]
+rstest = "0.26.1"
 
 [workspace.lints.rust]
 future-incompatible = "warn"

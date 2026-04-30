@@ -121,6 +121,7 @@ dependencies = [
 name = "questions"
 version = "0.0.0"
 dependencies = [
+ "rstest",
  "utils",
 ]
 

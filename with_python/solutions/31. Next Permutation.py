@@ -1,3 +1,5 @@
+# See newer solution...
+
 class Solution:
     def find_next_biggest_in_sorted_list(self,nums, pivot: int) -> int:
     #def find_next_biggest_in_sorted_list(self,nums: List[int], pivot: int) -> int:

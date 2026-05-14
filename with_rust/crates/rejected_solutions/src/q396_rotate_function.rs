@@ -9,9 +9,7 @@ impl Solution {
             let current_max: i32 = nums
                 .iter()
                 .enumerate()
-                .map(|(index, val)| {
-                    i32::try_from((index + rotation_offset) %n).unwrap() * val
-                })
+                .map(|(index, val)| i32::try_from((index + rotation_offset) % n).unwrap() * val)
                 .sum();
             max_so_far = max_so_far.max(current_max)
         }

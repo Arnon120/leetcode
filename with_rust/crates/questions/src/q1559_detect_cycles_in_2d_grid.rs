@@ -1,4 +1,3 @@
-
 // Sized union fined.
 struct UnionFind {
     par: Vec<usize>,
@@ -7,38 +6,33 @@ struct UnionFind {
 
 impl UnionFind {
     fn new(n: usize) -> Self {
-        Self {
-            par: (0..n).collect(),
-            sizes: vec![1; n],
-        }
+        Self { par: (0..n).collect(), sizes: vec![1; n] }
     }
 
     fn find(&mut self, i: usize) -> usize {
-        if i==self.par[i] {
+        if i == self.par[i] {
             return i;
         }
         self.par[i] = self.find(self.par[i]);
         self.par[i]
     }
 
-    fn union(&mut self, i:usize, j:usize) -> bool {
+    fn union(&mut self, i: usize, j: usize) -> bool {
         let (pi, pj) = (self.find(i), self.find(j));
-        if pi==pj {
-            return false
+        if pi == pj {
+            return false;
         }
 
-        if self.sizes[pi]<self.sizes[pj] {
-            self.par[pi]=pj;
-            self.sizes[pj]+=self.sizes[pi];
+        if self.sizes[pi] < self.sizes[pj] {
+            self.par[pi] = pj;
+            self.sizes[pj] += self.sizes[pi];
         } else {
-            self.par[pj]=pi;
-            self.sizes[pi]+=self.sizes[pj];
+            self.par[pj] = pi;
+            self.sizes[pi] += self.sizes[pj];
         }
         true
     }
-
 }
-
 
 struct Solution;
 
@@ -53,13 +47,9 @@ struct TravelGrid {
 impl TravelGrid {
     fn new(grid: &Vec<Vec<char>>) -> Self {
         let n = grid.len();
-        let travel_grid = Vec::with_capacity(grid.len()); 
-        let m = if n > 0 {
-            grid[0].len()
-        } else {
-            0
-        };
-        Self { travel_grid, n, m}
+        let travel_grid = Vec::with_capacity(grid.len());
+        let m = if n > 0 { grid[0].len() } else { 0 };
+        Self { travel_grid, n, m }
     }
 
     fn get(&mut self, i: usize, j: usize) -> bool {
@@ -71,8 +61,8 @@ impl TravelGrid {
     }
 
     // Returns an error if i or j are out of bounds.
-    fn get_set(&mut self, i: usize, j: usize, new_val: Option<bool>) -> Result<bool,()> {
-        if i >=self.n || j >= self.m {
+    fn get_set(&mut self, i: usize, j: usize, new_val: Option<bool>) -> Result<bool, ()> {
+        if i >= self.n || j >= self.m {
             return Err(());
         }
 
@@ -94,7 +84,6 @@ impl TravelGrid {
     }
 }
 
-
 #[derive(PartialEq, Eq, Debug)]
 enum TravelDirection {
     // This round is the starting point.
@@ -102,13 +91,19 @@ enum TravelDirection {
     Up,
     Right,
     Down,
-    Left
+    Left,
 }
 
 impl Solution {
-    fn travel_from(came_from: TravelDirection,i: usize, j: usize, grid: &Vec<Vec<char>>, travel_grid: &mut TravelGrid) -> bool{
+    fn travel_from(
+        came_from: TravelDirection,
+        i: usize,
+        j: usize,
+        grid: &Vec<Vec<char>>,
+        travel_grid: &mut TravelGrid,
+    ) -> bool {
         // println!("traveled to {i},{j}");
-        if travel_grid.get(i, j){
+        if travel_grid.get(i, j) {
             // if came_from == TravelDirection::Start{
             //     println!("This tile was already covered.")
             // }
@@ -120,14 +115,13 @@ impl Solution {
         // if came_from == TravelDirection::Start {
         //     println!("Starting the search for a cycle for the letter: {character}");
         // }
- 
+
         let mut next_pairs = vec![];
         if came_from != TravelDirection::Down && i > 0 {
-            next_pairs.push((TravelDirection::Up, i-1, j));
-
+            next_pairs.push((TravelDirection::Up, i - 1, j));
         }
         if came_from != TravelDirection::Right && j > 0 {
-            next_pairs.push((TravelDirection::Left, i, j-1));
+            next_pairs.push((TravelDirection::Left, i, j - 1));
         }
         if came_from != TravelDirection::Up && i + 1 < grid.len() {
             next_pairs.push((TravelDirection::Down, i + 1, j));
@@ -143,16 +137,14 @@ impl Solution {
                 let next_was_traveled = travel_grid.get(next_i, next_j);
                 if next_was_traveled {
                     return true;
-                }
-                else {
-                    let found_cycle = Self::travel_from(going_to, next_i, next_j, grid, travel_grid);
+                } else {
+                    let found_cycle =
+                        Self::travel_from(going_to, next_i, next_j, grid, travel_grid);
                     if found_cycle {
                         return true;
                     }
                 };
-
-            }
-            else {
+            } else {
                 // The next cell is not of this cycle.
                 continue;
             }
@@ -161,15 +153,16 @@ impl Solution {
         return false;
     }
 
-    pub fn contains_cycle(grid: Vec<Vec<char>>) -> bool {      
+    pub fn contains_cycle(grid: Vec<Vec<char>>) -> bool {
         if grid.is_empty() {
             return false;
         }
         let mut travel_grid = TravelGrid::new(&grid);
-        
+
         for i in 0..grid.len() {
             for j in 0..grid[i].len() {
-                let travel_result = Self::travel_from(TravelDirection::Start, i,j,&grid, &mut travel_grid);
+                let travel_result =
+                    Self::travel_from(TravelDirection::Start, i, j, &grid, &mut travel_grid);
                 if travel_result {
                     return true;
                 }
@@ -180,15 +173,14 @@ impl Solution {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
-    use rstest::rstest;
     use super::*;
+    use rstest::rstest;
 
     #[rstest]
     #[case(
-        vec![vec!['a','a','b']], 
+        vec![vec!['a','a','b']],
         false)]
     #[case(
         vec![
@@ -200,7 +192,7 @@ mod tests {
         ],
         false
     )]
-    fn run_test(#[case] grid: Vec<Vec<char>>, #[case] expected: bool){
+    fn run_test(#[case] grid: Vec<Vec<char>>, #[case] expected: bool) {
         test_contains_cycle(grid, expected);
     }
 

@@ -1,6 +1,7 @@
 pub mod q37_sudoku_solver;
 pub mod q50_pow_x_n;
 pub mod q83_remove_duplicates_from_sorted_list;
+pub mod q60_permutation_sequence;
 pub mod q88_merge_sorted_array;
 pub mod q121_best_time_to_buy_and_sell_stock;
 pub mod q122_best_time_to_buy_and_sell_stock_ii;

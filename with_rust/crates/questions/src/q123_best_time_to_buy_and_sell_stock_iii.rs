@@ -104,10 +104,11 @@ mod test {
 }
 
 
-
+#[allow(dead_code)]
 struct Solution2;
 
 impl Solution2 {
+    #[allow(dead_code)]
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         prices
             .into_iter()

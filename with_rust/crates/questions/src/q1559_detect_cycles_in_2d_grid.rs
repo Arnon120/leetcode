@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 // Sized union fined.
 struct UnionFind {
     par: Vec<usize>,

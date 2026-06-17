@@ -1,8 +1,10 @@
+#[allow(dead_code)]
 struct Solution;
 
 use std::collections::HashMap;
 
 impl Solution {
+    #[allow(dead_code)]
     pub fn four_sum_count(
         nums1: Vec<i32>,
         nums2: Vec<i32>,

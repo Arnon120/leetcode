@@ -1,6 +1,8 @@
+#[allow(dead_code)]
 struct Solution;
 
 impl Solution {
+    #[allow(dead_code)]
     pub fn get_permutation(n: i32, k: i32) -> String {
         let mut remaining_symbols: Vec<char> = (1..=(n as u8)).map(|i| (i + 48).into()).collect();
         let mut output: Vec<char> = vec![];

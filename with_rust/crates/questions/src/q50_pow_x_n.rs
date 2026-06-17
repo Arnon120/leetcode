@@ -1,6 +1,10 @@
+#[allow(dead_code)]
+
 struct Solution;
 
 impl Solution {
+    #[allow(dead_code)]
+
     pub fn my_pow(mut x: f64, mut n: i32) -> f64 {
         let mut aggregator = 1_f64; 
         

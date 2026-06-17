@@ -1,4 +1,4 @@
-use std::{cell, collections::binary_heap::Iter};
+#![allow(dead_code)]
 
 trait SudokuCellTrait: From<char> + Into<char> {
     // Returns a cell that we don't know the value of. Potentialy, can be either value from 1-9.
@@ -255,7 +255,7 @@ impl SudokuBoard {
 
 
 impl Solution {
-
+    #[allow(dead_code)]
     pub fn solve_sudoku(board: &mut Vec<Vec<char>>) {
         let mut sudoku_board = SudokuBoard::new(board);
         for _i in 0..82 {

@@ -1,3 +1,4 @@
+#[allow(dead_code)]
 struct Solution;
 
 fn get_from_array_with_distorted_index(nums: &[i32], index: usize) -> Option<i32> {
@@ -10,6 +11,7 @@ fn get_from_array_with_distorted_index(nums: &[i32], index: usize) -> Option<i32
 
 impl Solution {
     // Go from the end of the arrays to the beggining! Fill the end of nums1 in decending order...
+    #[allow(dead_code)]
     pub fn merge(nums1: &mut Vec<i32>, m: i32, nums2: &mut Vec<i32>, n: i32) {
         let mut i: usize = m.try_into().unwrap();
         let mut j: usize = n.try_into().unwrap();

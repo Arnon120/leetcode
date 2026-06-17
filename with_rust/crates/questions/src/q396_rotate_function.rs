@@ -1,6 +1,8 @@
+#[allow(dead_code)]
 struct Solution;
 
 impl Solution {
+    #[allow(dead_code)]
     pub fn max_rotate_function(nums: Vec<i32>) -> i32 {
         let n = nums.len();
         let sum: i32 = nums.iter().sum();
@@ -18,6 +20,7 @@ impl Solution {
         current_max
     }
 
+#[allow(dead_code)]
     fn rejected_max_rotate_function(nums: Vec<i32>) -> i32 {
         let mut max_so_far = i32::MIN;
         let n = nums.len();
